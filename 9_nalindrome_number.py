@@ -12,6 +12,7 @@ class Solution:
                 return True
             elif not even_flg and i >= len(list) / 2 - 1:
                 return True
+            # 末尾から取る場合は-1スタートになる為+1する。
             if num != list[-(i + 1)]:
                 return False
         # ここには来ない
