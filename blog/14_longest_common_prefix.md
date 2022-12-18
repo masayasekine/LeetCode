@@ -6,7 +6,7 @@
 
 いつまで続くかもわからないが、せっかくなら記事に残そうということで連載を開始。
 
-4回目。とりあえずは3回で終わらなくてよかった。
+4 回目。とりあえずは 3 回で終わらなくてよかった。
 
 ## 問題
 
@@ -16,7 +16,9 @@
 >
 > If there is no common prefix, return an empty string "".
 
-与えられた文字列の配列の中身で共通しているprefixを返却するという内容。
+与えられた文字列の配列の中身で共通している最長の文字列を返却するという内容。
+
+最初、prefix とあったので先頭の文字列限定かと思って失敗した。
 
 ## Constraints
 
@@ -38,21 +40,44 @@
 
 ## 思考プロセス
 
-すぐ思いつくのは、各文字列をindexで比較して合うところまで返却するという方法。
+すぐ思いつくのは、各文字列を index で比較して合うところまで返却するという方法。
 
 でもこれは例のごとく全探索になりそうなので止めた方が良さそうだ。
 
-条件として配列の長さは200以下、文字列の長さも200以下なので、全部一致するようなケースで計算量が増えすぎそう。
+条件として配列の長さは 200 以下、文字列の長さも 200 以下なので、全部一致するようなケースで計算量が増えすぎそう。
 
-1つの単語で他の文字列に対してre.search()して、無いやつがいたら後ろから1文字減らしてというのを繰り返せば全探索よりは速そう。
-
-ただ、その場合全部完全に異なる文字列だった場合に遅そうだ。
+1 つの単語で他の文字列に対して re.search()して、無いやつがいたら後ろから 1 文字減らしてというのを繰り返せば全探索よりは速そう。
 
 共通部分を抜き出すような関数があるかと思いググっていたところ、クリティカルな答えに当たりそうだったため中止した。
 
-一旦は自力で思いつける範囲の、ループして比較する方法を検討する。
-
 ## 最初に提出した解
+
+```python
+from typing import List
+
+
+class Solution:
+    prefix: str = ""
+
+    def compare(self, strs: List[str]) -> bool:
+        for st in strs:
+            if self.prefix not in st:
+                self.prefix = self.prefix[:-1]
+                return False
+        return True
+
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        self.prefix = strs[0]
+        if len(strs) == 1:
+            return self.prefix
+        while True:
+            if not self.prefix:
+                break
+            if self.compare(strs):
+                break
+        print(self.prefix)
+        return self.prefix
+```
 
 ## 結果
 
