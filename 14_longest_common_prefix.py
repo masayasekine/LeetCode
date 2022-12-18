@@ -6,7 +6,7 @@ class Solution:
 
     def compare(self, strs: List[str]) -> bool:
         for st in strs:
-            if self.prefix not in st:
+            if not st.startswith(self.prefix):
                 self.prefix = self.prefix[:-1]
                 return False
         return True
@@ -24,6 +24,31 @@ class Solution:
         return self.prefix
 
 
+class SolutionHorizon:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ""
+        prefix = strs[0]
+
+        for st in strs:
+            while prefix and not st.startswith(prefix):
+                prefix = prefix[:-1]
+        return prefix
+
+
+class SolutionVertical:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ""
+        if len(strs) == 1:
+            return strs[0]
+        for i, c in enumerate(strs[0]):
+            for st in strs:
+                if i == len(st) or st[i] != c:
+                    return strs[0][:i]
+        return strs[0]
+
+
 if __name__ == "__main__":
-    strs = ["c","acc","ccc"]
-    Solution().longestCommonPrefix(strs)
+    strs = ["flower", "flow", "flight"]
+    SolutionVertical().longestCommonPrefix(strs)
