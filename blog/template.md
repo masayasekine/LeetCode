@@ -24,7 +24,7 @@ Memory: MB
 
 ## もうちょい考える
 
-## Solutions を見る/
+## Solutions を見る
 
 ## 何をしているのか？
 
