@@ -23,5 +23,4 @@ class Solution:
                 next = simpleMergedList[i]
             )
             mergedNodeList[i] = node
-        print(mergedNodeList)
         return mergedNodeList
